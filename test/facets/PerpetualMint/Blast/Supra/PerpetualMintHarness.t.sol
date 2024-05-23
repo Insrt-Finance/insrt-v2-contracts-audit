@@ -106,7 +106,8 @@ contract PerpetualMintHarnessSupraBlast is
         uint256 mintEarningsFeePerSpin,
         uint256 mintPriceAdjustmentFactor,
         uint256 prizeValueInWei,
-        uint8 numWords
+        uint8 numWords,
+        uint32 riskRewardRatio
     ) external {
         Storage.Layout storage l = Storage.layout();
 
@@ -115,11 +116,14 @@ contract PerpetualMintHarnessSupraBlast is
         _requestRandomWordsSupra(
             l,
             collectionData,
-            minter,
-            collection,
-            mintEarningsFeePerSpin,
-            mintPriceAdjustmentFactor,
-            prizeValueInWei,
+            RequestData({
+                minter: minter,
+                collection: collection,
+                mintEarningsFeePerSpin: mintEarningsFeePerSpin,
+                mintPriceAdjustmentFactor: mintPriceAdjustmentFactor,
+                prizeValueInWei: prizeValueInWei,
+                riskRewardRatio: riskRewardRatio
+            }),
             numWords
         );
     }
@@ -194,7 +198,6 @@ contract PerpetualMintHarnessSupraBlast is
         _resolveMintsForEthBlast(
             l,
             request,
-            _collectionMintMultiplier(collectionData),
             _collectionMintPrice(collectionData),
             randomWords,
             _ethToMintRatio(l)
@@ -333,14 +336,16 @@ contract PerpetualMintHarnessSupraBlast is
         address collection,
         uint256 mintEarningsFeePerSpin,
         uint256 mintPriceAdjustmentFactor,
-        uint256 prizeValueInWei
+        uint256 prizeValueInWei,
+        uint32 riskRewardRatio
     ) external {
         Storage.layout().requests[requestId] = RequestData({
             collection: collection,
             minter: minter,
             mintEarningsFeePerSpin: mintEarningsFeePerSpin,
             mintPriceAdjustmentFactor: mintPriceAdjustmentFactor,
-            prizeValueInWei: prizeValueInWei
+            prizeValueInWei: prizeValueInWei,
+            riskRewardRatio: riskRewardRatio
         });
     }
 }

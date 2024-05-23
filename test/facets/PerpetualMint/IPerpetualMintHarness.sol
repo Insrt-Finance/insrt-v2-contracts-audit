@@ -53,7 +53,8 @@ interface IPerpetualMintHarness {
         uint256 mintEarningsFee,
         uint256 mintPriceAdjustmentFactor,
         uint256 prizeValueInWei,
-        uint8 numWords
+        uint8 numWords,
+        uint32 riskRewardRatio
     ) external;
 
     /// @dev exposes requests
@@ -110,6 +111,7 @@ interface IPerpetualMintHarness {
         address collection,
         uint256 mintEarningsFee,
         uint256 mintPriceAdjustmentFactor,
-        uint256 prizeValueInWei
+        uint256 prizeValueInWei,
+        uint32 riskRewardRatio
     ) external;
 }
